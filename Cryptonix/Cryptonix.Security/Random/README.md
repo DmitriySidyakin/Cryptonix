@@ -2,6 +2,8 @@
 
 ## Spiralizer
 
+This is used to randomize the array data. There is no reverse transformation, it is mixing.
+
 Sample Array 1: {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
 Sample Array 2: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
