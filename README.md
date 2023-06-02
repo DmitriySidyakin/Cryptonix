@@ -1,2 +1,2 @@
-# Cryptonix
-Encryption library for .Net
+# Cryptonix.Security
+The encryption library for .Net 6
