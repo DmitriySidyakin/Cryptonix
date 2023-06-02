@@ -4,5 +4,5 @@ The encryption library for .Net 6
 
 ## It is realized
 
-[Cryptonix/Cryptonix.Security/Random] (Random):
+[Random] (Cryptonix/Cryptonix.Security/Random):
 - Spiralizer
