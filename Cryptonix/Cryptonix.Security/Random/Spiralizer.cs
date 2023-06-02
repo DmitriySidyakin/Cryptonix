@@ -1,5 +1,9 @@
-﻿namespace Cryptonix.Security
+﻿namespace Cryptonix.Security.Random
 {
+    /**
+     * Класс для псевдослучайного перемешивания массива.
+     * Массив перемешивается по спирали.
+     **/
     public static class Spiralizer
     {
         public static byte[] Spiralize(int width, int height, byte[,] matrix)
@@ -130,11 +134,15 @@
 
             return result;
         }
-        
-        private static byte[,] Despiralize( byte[] matrix)
+
+        public static byte[] Spiralize(int width, int height, byte[] byteArray)
         {
-            int width, int height;
-            ArrayToMartix(out int width, out int height, byte[] bytes)
+            if (width * height == 0)
+                return new byte[0];
+
+            var matrix = ArrayToMartix(out width, out height, byteArray);
+
+            return Spiralize(width, height, matrix);
         }
     }
 }

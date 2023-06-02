@@ -1,0 +1,4 @@
+﻿# Cryptonix.Security.Random
+
+## Spiralizer
+
