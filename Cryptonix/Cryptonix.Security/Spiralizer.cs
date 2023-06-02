@@ -130,25 +130,11 @@
 
             return result;
         }
-        /*
-        private static byte[,] Despiralize(int width, int height, byte[] matrix)
+        
+        private static byte[,] Despiralize( byte[] matrix)
         {
-
+            int width, int height;
+            ArrayToMartix(out int width, out int height, byte[] bytes)
         }
-        */
-
-
-
-
-        /*
-        public static byte[] Encrypt(byte[] bytes)
-        {
-
-        }
-
-        public static byte Decrypt(byte[] bytes)
-        {
-
-        }*/
     }
 }
