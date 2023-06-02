@@ -2,4 +2,4 @@
 
 ## Spiralizer
 
-![../../../docs/spiralizer_arrays.svg](Spiralization sequence)
+![Spiralization sequence](../../../docs/spiralizer_arrays.svg)
