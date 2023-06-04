@@ -1,4 +1,4 @@
-﻿namespace Cryptonix.Security.Random
+﻿namespace Cryptonix.Security
 {
     /**
      * Класс для псевдослучайного перемешивания массива.
