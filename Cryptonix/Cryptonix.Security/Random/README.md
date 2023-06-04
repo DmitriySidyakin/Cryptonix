@@ -15,3 +15,5 @@ Transform the linear array and spiralize it like here:
 Sample Array 1 Spiralized: { 1, 4, 7, 8, 9, 6, 3, 2, 5 }
 
 Sample Array 2 Spiralized: { 1, 4, 7, 10, 11, 12, 9, 6, 3, 2, 5, 8 }
+
+Despiralization is a data recovery process, reverse transformation.
