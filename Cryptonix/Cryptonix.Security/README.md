@@ -1,4 +1,4 @@
-﻿# Cryptonix.Security.Random
+﻿# Cryptonix.Security
 
 ## Spiralizer
 
@@ -10,7 +10,7 @@ Sample Array 2: { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }
 
 Transform the linear array and spiralize it like here: 
 
-![Spiralization sequence](../../../docs/spiralizer_arrays.svg)
+![Spiralization sequence](../../docs/spiralizer_arrays.svg)
 
 Sample Array 1 Spiralized: { 1, 4, 7, 8, 9, 6, 3, 2, 5 }
 
