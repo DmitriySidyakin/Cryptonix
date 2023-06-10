@@ -69,8 +69,7 @@
         {
             /* Example:
              * bytes = 
-             *  1, 2, 3, 4, 5, 6, 7, 8
-             *  , 9
+             *  1, 2, 3, 4, 5, 6, 7, 8, 9
              */
 
             if (bytes.Length == 0)
@@ -143,6 +142,121 @@
             var matrix = ArrayToMartix(out width, out height, byteArray);
 
             return Spiralize(width, height, matrix);
+        }
+
+        public static byte[,] SpiralizedArrayToNormalMartix(out int width, out int height, byte[] bytes)
+        {
+            /* Example:
+             * bytes = 
+             *  1, 2, 3, 4, 5, 6, 7, 8, 9
+             */
+
+            if (bytes.Length == 0)
+            {
+                width = 0;
+                height = 0;
+                return new byte[0, 0];
+            }
+
+
+            int currentWidth = bytes.Length / 2;
+            int currentHeight = bytes.Length / currentWidth;
+
+            while (currentWidth > currentHeight)
+            {
+                currentWidth = currentWidth - 1;
+                currentHeight = bytes.Length / currentWidth;
+            }
+
+            byte[,] result = new byte[currentWidth, currentHeight];
+
+            // Despiralization of Array in Matrix
+
+            int resultSize = bytes.Length;
+            bool isItTheEnd = false;
+            int startTopIndex_i = 0;
+            int endTopIndex_i = currentWidth - 1;
+            int startTopIndex_j = 0;
+            int endTopIndex_j = currentHeight - 1;
+            int currentIndex = 0;
+            while (!isItTheEnd)
+            {
+                for (int j = startTopIndex_j; j <= endTopIndex_j && currentIndex != resultSize; j++)
+                {
+                    result[startTopIndex_i, j] = bytes[currentIndex];
+                    currentIndex++;
+                }
+
+                startTopIndex_i++;
+
+                for (int i = startTopIndex_i; i <= endTopIndex_i && currentIndex != resultSize; i++)
+                {
+                    result[i, endTopIndex_j] = bytes[currentIndex];
+                    currentIndex++;
+                }
+
+                endTopIndex_j--;
+
+                for (int j = endTopIndex_j; j >= startTopIndex_j && currentIndex != resultSize; j--)
+                {
+                    result[endTopIndex_i, j] = bytes[currentIndex];
+                    currentIndex++;
+                }
+
+                endTopIndex_i--;
+
+                for (int i = endTopIndex_i; i >= startTopIndex_i && currentIndex != resultSize; i--)
+                {
+                    result[i, startTopIndex_j] = bytes[currentIndex];
+                    currentIndex++;
+                }
+
+                startTopIndex_j++;
+
+
+                if (currentIndex == resultSize)
+                {
+                    isItTheEnd = true;
+                }
+            }
+
+            width = currentWidth;
+            height = currentHeight;
+            return result;
+        }
+        
+        public static byte[] Despiralize(out int width, out int height, byte[] spiralizedArray)
+        {
+            if (spiralizedArray.Length == 0)
+            {
+                width = 0;
+                height = 0;
+                return new byte[0];
+            }
+
+            var despiralizedMatrix = Spiralizer.SpiralizedArrayToNormalMartix(out width, out height, spiralizedArray);
+
+            return Despiralize(width, height, despiralizedMatrix);
+        }
+
+        public static byte[] Despiralize(int width, int height, byte[,] despiralizedMatrix)
+        {
+            if (width * height == 0)
+                return new byte[0];
+
+            byte[] result = new byte[width * height];
+
+            int currentIndex = 0;
+            for (int j = 0; j < height; j++)
+            {
+                for (int i = 0; i < width; i++)
+                {
+                    result[currentIndex] = despiralizedMatrix[i, j];
+                    currentIndex++;
+                }
+            }
+
+            return result;
         }
     }
 }

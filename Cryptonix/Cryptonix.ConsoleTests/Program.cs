@@ -1,5 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using Cryptonix.Security.Random;
+using Cryptonix.Security;
 
 Console.WriteLine("Testing!");
 
@@ -114,6 +114,51 @@ void SpiralizerTest()
         Console.Write(i == bytes_DoubleSpiralized_0005.Length - 1 ? bytes_DoubleSpiralized_0005[i] : $"{bytes_DoubleSpiralized_0005[i]}, ");
     }
     Console.WriteLine();
+    /******************************************************************************************************************/
+    #endregion
+
+    #region Test 0006
+    /******************************************************************************************************************/
+
+    Console.WriteLine("Test #0006:");
+    var despiralizedMatrix = Spiralizer.SpiralizedArrayToNormalMartix(out w, out h, bytes_Spiralized_0003);
+
+    Console.WriteLine($"\tTest #0006.Despiralized Matrix: ");
+
+    for (int j = 0; j < h; j++)
+    {
+        for (int i = 0; i < w; i++)
+        {
+            Console.Write($"{despiralizedMatrix[i, j]}, ");
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+
+    /******************************************************************************************************************/
+    #endregion
+
+    #region Test 0007
+    /******************************************************************************************************************/
+
+    Console.WriteLine("Test #0007:");
+
+    Console.WriteLine($"\tTest #0007.Despiralized Array: ");
+
+    var despiralizedArray1 = Spiralizer.Despiralize(out w, out h, bytes_Spiralized_0003);
+    var despiralizedArray2 = Spiralizer.Despiralize(w, h, despiralizedMatrix);
+
+    for (int i = 0; i < despiralizedArray1.Length; i++)
+    {
+        Console.Write($"{despiralizedArray1[i]}, ");
+    }
+    Console.WriteLine();
+    for (int i = 0; i < despiralizedArray2.Length; i++)
+    {
+        Console.Write($"{despiralizedArray2[i]}, ");
+    }
+    Console.WriteLine();
+
     /******************************************************************************************************************/
     #endregion
 }
