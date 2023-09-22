@@ -69,7 +69,7 @@
         {
             /* Example:
              * bytes = 
-             *  1, 2, 3, 4, 5, 6, 7, 8, 9
+             *  1, 2, 3, 4, 5, 6, 7
              */
 
             if (bytes.Length == 0)
@@ -86,7 +86,14 @@
             while (currentWidth > currentHeight)
             {
                 currentWidth = currentWidth - 1;
+                    
                 currentHeight = bytes.Length / currentWidth;
+            }
+
+            if(currentWidth * currentHeight != bytes.Length)
+            {
+                currentWidth = 1;
+                currentHeight = bytes.Length;
             }
 
             byte[,] result = new byte[currentWidth, currentHeight];
