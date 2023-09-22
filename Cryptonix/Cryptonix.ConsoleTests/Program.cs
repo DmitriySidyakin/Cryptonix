@@ -16,7 +16,7 @@ void SpiralizerTest()
 
     Console.WriteLine("Test #0001:");
 
-    byte[] buffer_0001 = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    byte[] buffer_0001 = new byte[] { 1, 2, 3, 4, 5, 6, 7/*, 8, 9*/ };
     int w, h;
     byte[,] bytesM_0001 = Spiralizer.ArrayToMartix(out w, out h, buffer_0001);
     byte[] bytes_0001 = Spiralizer.MartixToArray(w, h, bytesM_0001);

@@ -175,6 +175,12 @@
                 currentHeight = bytes.Length / currentWidth;
             }
 
+            if (currentWidth * currentHeight != bytes.Length)
+            {
+                currentWidth = 1;
+                currentHeight = bytes.Length;
+            }
+
             byte[,] result = new byte[currentWidth, currentHeight];
 
             // Despiralization of Array in Matrix
