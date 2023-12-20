@@ -14,11 +14,19 @@ for(int i = 0; i < 17; i++)
 }
 */
 
-byte[] bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+byte[] bytes = new byte[] {
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
+};
 
 
-byte[] result1 = Xorer.Xor3Encrypt(bytes, new byte[] { 4, 255, 2, 123, 144, 56, 77, 21, 59, 10 });
-byte[] result1_2 = Xorer.Xor3Dencrypt(result1, new byte[] { 4, 255, 2, 123, 144, 56, 77, 21, 59, 10 });
+byte[] result1 = Xorer.Xor4Encrypt(bytes, new byte[] { 4, 255, 2, 123, 144, 56, 77, 21, 59, 10 });
+byte[] result1_2 = Xorer.Xor4Dencrypt(result1, new byte[] { 4, 255, 2, 123, 144, 56, 77, 21, 59, 10 });
 long i = 0;
 foreach(byte r in result1_2)
 {

@@ -13,7 +13,7 @@ namespace Cryptonix.Security
         {
             byte[] result = new byte[byteArray.Length];
 
-            for(long currentByte = 0, currentKeyIndex = 0; currentByte < byteArray.Length; currentByte++)
+            for (long currentByte = 0, currentKeyIndex = 0; currentByte < byteArray.Length; currentByte++)
             {
                 result[currentByte] = (byte)(byteArray[currentByte] ^ key[currentKeyIndex++]);
                 if (currentKeyIndex >= key.Length)
@@ -148,7 +148,7 @@ namespace Cryptonix.Security
         {
             byte[] result = new byte[byteArray.LongLength];
 
-            for(long currentByte = 0, currentKeyIndex = 0; currentByte < byteArray.LongLength; currentByte++)
+            for (long currentByte = 0, currentKeyIndex = 0; currentByte < byteArray.LongLength; currentByte++)
             {
                 result[currentByte] = (byte)(byteArray[currentByte] ^ xor2Matrix[key[currentKeyIndex]] ^ key[currentKeyIndex]);
                 if (++currentKeyIndex >= key.Length)
@@ -178,7 +178,7 @@ namespace Cryptonix.Security
         {
             byte[] result = new byte[byteArray.LongLength];
 
-            for(long currentByte = 0, currentKeyIndex = 0; currentByte < byteArray.LongLength; currentByte++)
+            for (long currentByte = 0, currentKeyIndex = 0; currentByte < byteArray.LongLength; currentByte++)
             {
                 result[currentByte] = (byte)(byteArray[currentByte] ^ (key[currentKeyIndex] << 4) ^ (key[currentKeyIndex] >> 4));
 
@@ -204,17 +204,102 @@ namespace Cryptonix.Security
             return result;
         }
 
-        public static byte[] Xor4(byte[] byteArray, byte[] key)
+        public static byte[] Xor4Encrypt(byte[] byteArray, byte[] key)
         {
-            return new byte[] { };
+            byte[] invertedKey = InvertKey(key);
+
+            return
+                Xor3Encrypt(
+                    Xor(
+                        Xor2Encrypt(
+                            Xor1Encrypt(byteArray, key),
+                            invertedKey),
+                        invertedKey),
+                    key
+                    );
         }
 
-        public static byte[] XorMixerEncrypt(byte[] byteArray)
+        private static byte[] InvertKey(byte[] key)
         {
-            return new byte[] { };
+            byte[] invertedKey = new byte[key.Length];
+            long currentKeyByte = 0;
+            foreach (byte b in key)
+            {
+                invertedKey[currentKeyByte] = key[currentKeyByte];
+                currentKeyByte++;
+            }
+
+            return invertedKey;
         }
 
-        public static byte[] XorMixerDencrypt(byte[] byteArray)
+        public static byte[] Xor4Dencrypt(byte[] byteArray, byte[] key)
+        {
+            byte[] invertedKey = InvertKey(key);
+            return Xor1Encrypt(Xor2Encrypt(Xor(Xor3Encrypt(byteArray, key), invertedKey), invertedKey), key);
+        }
+
+
+        public static byte[] XorMixerEncrypt(byte[] byteArray, byte[] key)
+        {
+            byte[] result = (byte[])byteArray.Clone();
+
+            foreach (byte b in key)
+            {
+                byte f1 = (byte)(b >> 4);
+                byte f2 = (byte)(b & 0b00001111);
+
+                switch (f1)
+                {
+                    case 0:
+                        {
+                            result = Xor1Encrypt(result, key);
+                        }
+                        break;
+                    case 1:
+                        {
+                            result = Xor2Encrypt(result, key);
+                        }
+                        break;
+                    case 2:
+                        {
+                            result = Xor3Encrypt(result, key);
+                        }
+                        break;
+                    case 3:
+                        {
+                            result = Xor4Encrypt(result, key);
+                        }
+                        break;
+                }
+                switch (f2)
+                {
+                    case 0:
+                        {
+                            result = Xor1Encrypt(result, key);
+                        }
+                        break;
+                    case 1:
+                        {
+                            result = Xor2Encrypt(result, key);
+                        }
+                        break;
+                    case 2:
+                        {
+                            result = Xor3Encrypt(result, key);
+                        }
+                        break;
+                    case 3:
+                        {
+                            result = Xor4Encrypt(result, key);
+                        }
+                        break;
+                }
+            }
+
+            return result;
+        }
+
+        public static byte[] XorMixerDencrypt(byte[] byteArray, byte[] key)
         {
             return new byte[] { };
         }
