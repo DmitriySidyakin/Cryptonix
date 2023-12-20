@@ -6,7 +6,7 @@
      **/
     public static class Spiralizer
     {
-        public static byte[] Spiralize(int width, int height, byte[,] matrix)
+        private static byte[] Spiralize(int width, int height, byte[,] matrix)
         {
             if (matrix.Length == 0)
                 return new byte[0];
@@ -65,7 +65,7 @@
             return result;
         }
 
-        public static byte[,] ArrayToMartix(out int width, out int height, byte[] bytes)
+        private static byte[,] ArrayToMartix(out int width, out int height, byte[] bytes)
         {
             /* Example:
              * bytes = 
@@ -118,7 +118,7 @@
             return result;
         }
 
-        public static byte[] MartixToArray(int width, int height, byte[,] bytes)
+        private static byte[] MartixToArray(int width, int height, byte[,] bytes)
         {
             if (bytes.Length == 0)
             {
@@ -141,17 +141,19 @@
             return result;
         }
 
-        public static byte[] Spiralize(int width, int height, byte[] byteArray)
+        public static byte[] Spiralize(byte[] byteArray)
         {
-            if (width * height == 0)
-                return new byte[0];
+            int width, height;
 
             var matrix = ArrayToMartix(out width, out height, byteArray);
+
+            if (width * height == 0)
+                return new byte[0];
 
             return Spiralize(width, height, matrix);
         }
 
-        public static byte[,] SpiralizedArrayToNormalMartix(out int width, out int height, byte[] bytes)
+        private static byte[,] SpiralizedArrayToNormalMartix(out int width, out int height, byte[] bytes)
         {
             /* Example:
              * bytes = 
@@ -237,8 +239,8 @@
             height = currentHeight;
             return result;
         }
-        
-        public static byte[] Despiralize(out int width, out int height, byte[] spiralizedArray)
+
+        private static byte[] Despiralize(out int width, out int height, byte[] spiralizedArray)
         {
             if (spiralizedArray.Length == 0)
             {
@@ -252,7 +254,21 @@
             return Despiralize(width, height, despiralizedMatrix);
         }
 
-        public static byte[] Despiralize(int width, int height, byte[,] despiralizedMatrix)
+        public static byte[] Despiralize(byte[] spiralizedArray)
+        {
+            int width, height;
+
+            var despiralizedMatrix = Spiralizer.SpiralizedArrayToNormalMartix(out width, out height, spiralizedArray);
+
+            if (width == 0 && height == 0)
+            {
+                return new byte[0];
+            }
+
+            return Despiralize(width, height, despiralizedMatrix);
+        }
+
+        private static byte[] Despiralize(int width, int height, byte[,] despiralizedMatrix)
         {
             if (width * height == 0)
                 return new byte[0];
