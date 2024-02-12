@@ -13,7 +13,7 @@ for(int i = 0; i < 17; i++)
     Console.WriteLine();
 }
 */
-
+/*
 byte[] bytes = new byte[] {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
     1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
@@ -33,6 +33,15 @@ foreach(byte r in result1_2)
     if(r != bytes[i++]) {  Console.WriteLine("Error"); }
 }
 //SpiralizerTest();
+*/
+int[] arr = new int[] {0, 1, 2 , 3};
+int i = 1;
+var arr2 = arr[^(i+1)];
+Console.Write(arr2);/*
+foreach (var i in arr2)
+{
+    Console.Write(i);
+}*/
 
 void SpiralizerTest()
 {
